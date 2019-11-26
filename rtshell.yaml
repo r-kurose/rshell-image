@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-rtshell
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rtshell
+  template:
+    metadata:
+      labels:
+        app: rtshell
+    spec:
+      containers:
+      - name: container-rtshell
+        image: kuroseaist/rtshell:1.0
+        command:
+          - /usr/bin/tail
+        args:
+          - "-f"
+          - "/dev/null"
+      nodeSelector:
+        rtshell: "true"
